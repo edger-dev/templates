@@ -16,9 +16,9 @@ spec:
         app: yacd
     spec:
       containers:
-      - name: yacd
-        image: docker.io/haishanh/yacd:latest
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 80
-          name: web
+        - name: yacd
+          image: docker.io/haishanh/yacd:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              name: web

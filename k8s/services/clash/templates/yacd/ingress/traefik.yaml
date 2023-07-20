@@ -6,13 +6,13 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: {{ yacd_host }}
-    http:
-      paths:
-      - backend:
-          service:
-            name: yacd
-            port:
-              number: 80
-        path: /
-        pathType: Prefix
+    - host: {{ yacd_host }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: yacd
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

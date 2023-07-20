@@ -16,23 +16,23 @@ spec:
         app: clash
     spec:
       containers:
-      - name: clash
-        image: docker.io/dreamacro/clash:latest
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: {{ socks5_port }}
-          name: socks5
-        - containerPort: {{ http_port }}
-          name: http
-        - containerPort: {{ control_port }}
-          name: control
-        volumeMounts:
-          - mountPath: "/etc/clash"
-            name: clash-config
-        args:
-        - "-f"
-        - "/etc/clash/config.yaml"
+        - name: clash
+          image: docker.io/dreamacro/clash:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ socks5_port }}
+              name: socks5
+            - containerPort: {{ http_port }}
+              name: http
+            - containerPort: {{ control_port }}
+              name: control
+          volumeMounts:
+            - mountPath: "/etc/clash"
+              name: clash-config
+          args:
+            - "-f"
+            - "/etc/clash/config.yaml"
       volumes:
-      - name: clash-config
-        configMap:
-          name: clash-config
+        - name: clash-config
+          configMap:
+            name: clash-config
