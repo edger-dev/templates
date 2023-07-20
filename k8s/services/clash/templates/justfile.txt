@@ -1,0 +1,35 @@
+get-pods:
+    kubectl get pods --namespace {{ namespace }}
+apply-clash-config:
+    kubectl create --namespace {{ namespace }} configmap clash-config --from-file=clash/config.yaml
+apply-clash:
+    kubectl apply -f clash/deployment.yaml
+    kubectl apply -f clash/service.yaml
+apply-yacd:
+    kubectl apply -f yacd/deployment.yaml
+    kubectl apply -f yacd/service.yaml
+    kubectl apply -f yacd/ingress.yaml
+apply-all:
+    just apply-clash-config
+    just apply-clash
+    just apply-yacd
+delete-clash-config:
+    kubectl delete --namespace {{ namespace }} configmap clash-config
+delete-clash:
+    kubectl delete -f clash/deployment.yaml
+    kubectl delete -f clash/service.yaml
+delete-yacd:
+    kubectl delete -f yacd/deployment.yaml
+    kubectl delete -f yacd/service.yaml
+    kubectl delete -f yacd/ingress.yaml
+delete-all:
+    just delete-clash-config
+    just delete-clash
+    just delete-yacd
+update-clash-config:
+    just delete-clash-config
+    just apply-clash-config
+restart-clash:
+    just delete-clash-config
+    just apply-clash-config
+    kubectl --namespace {{ namespace }} rollout restart deploy/clash

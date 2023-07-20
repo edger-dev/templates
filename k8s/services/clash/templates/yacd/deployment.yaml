@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ namespace }}
+  name: yacd
+  labels:
+    app: yacd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yacd
+  template:
+    metadata:
+      labels:
+        app: yacd
+    spec:
+      containers:
+      - name: yacd
+        image: docker.io/haishanh/yacd:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: web

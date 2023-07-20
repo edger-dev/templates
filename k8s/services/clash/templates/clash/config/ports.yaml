@@ -1,0 +1,4 @@
+socks-port: {{ socks5_port }}
+port: {{ http_port }}
+allow-lan: true
+external-controller: 0.0.0.0:{{ control_port }}
