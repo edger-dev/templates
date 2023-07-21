@@ -1,5 +1,5 @@
 _list:
-    just -l
+    cd {{ justfile_directory() }} ; just -l
 _run_package bin package-name output:
     cd {{ invocation_directory() }} ; \
     cargo run --manifest-path {{ justfile_directory() }}/Cargo.toml \
