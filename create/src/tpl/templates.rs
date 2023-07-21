@@ -9,6 +9,6 @@ pub struct Justfile(Config);
 
 pub fn generate(writer: &TemplateWriter, config: &Config) {
     let writer = writer.in_folder("templates");
-    writer.write("justfile.txt", &Justfile(config.clone()));
+    writer.write("justfile", &Justfile(config.clone()));
 }
 

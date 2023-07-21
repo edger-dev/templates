@@ -1,0 +1,16 @@
+get-pods:
+    kubectl get pods --namespace {{ namespace }}
+apply-plantuml-server:
+    kubectl apply -f plantuml-server/deployment.yaml
+    kubectl apply -f plantuml-server/service.yaml
+    kubectl apply -f plantuml-server/ingress.yaml
+apply-all:
+    just apply-plantuml-server
+delete-plantuml-server:
+    kubectl delete -f plantuml-server/deployment.yaml
+    kubectl delete -f plantuml-server/service.yaml
+    kubectl delete -f plantuml-server/ingress.yaml
+delete-all:
+    just delete-plantuml-server
+restart-plantuml-server:
+    kubectl --namespace {{ namespace }} rollout restart deploy/plantuml-server

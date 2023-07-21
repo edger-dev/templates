@@ -27,7 +27,7 @@ delete-minio:
 delete-all:
     just delete-minio-secrets
     just delete-minio
-update-minio-config:
+update-minio-secrets:
     just delete-minio-secrets
     just apply-minio-secrets
 restart-minio:

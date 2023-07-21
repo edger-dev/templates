@@ -10,6 +10,7 @@ members = [
     "create",
     "k8s/services/clash",
     "k8s/services/minio",
+    "k8s/services/plantuml",
 ]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

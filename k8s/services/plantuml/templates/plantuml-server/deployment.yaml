@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ namespace }}
+  name: plantuml-server
+  labels:
+    app: plantuml-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plantuml-server
+  template:
+    metadata:
+      labels:
+        app: plantuml-server
+    spec:
+      containers:
+        - name: plantuml-server
+          image: docker.io/plantuml/plantuml-server:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: web
