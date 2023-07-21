@@ -7,7 +7,8 @@ repository = "https://github.com/edger-dev/templates"
 [workspace]
 resolver = "2"
 members = [
-    "create",
+    "rust/common/lib",
+    "rust/common/template",
     "k8s/services/clash",
     "k8s/services/minio",
     "k8s/services/plantuml",

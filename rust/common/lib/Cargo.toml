@@ -1,6 +1,6 @@
 [package]
 publish = false
-name = "create_template"
+name = "rust_lib"
 version = "0.1.0"
 
 edition.workspace = true

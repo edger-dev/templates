@@ -1,7 +1,7 @@
 use clap::Parser;
 use edger_tui_app::prelude::{ConfigLoaderBuilder, TemplateWriterBuilder};
 
-use create_template::Args;
+use rust_template::Args;
 
 fn main() {
     let args = Args::parse();
@@ -14,5 +14,5 @@ fn main() {
     let writer = TemplateWriterBuilder::default()
         .path(args.output_path())
         .build().unwrap();
-    create_template::generate(&writer, &config);
+    rust_template::generate(&writer, &config);
 }
