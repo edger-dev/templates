@@ -4,7 +4,7 @@ use deref_derive::Deref;
 use crate::{Config, TemplateWriter};
 
 #[derive(Template, Deref)]
-#[template(path = "templates/justfile.txt")]
+#[template(path = "templates/justfile")]
 pub struct Justfile(Config);
 
 pub fn generate(writer: &TemplateWriter, config: &Config) {

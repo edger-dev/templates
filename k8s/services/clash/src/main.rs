@@ -1,7 +1,7 @@
 use clap::Parser;
 use edger_tui_app::prelude::{ConfigLoaderBuilder, TemplateWriterBuilder};
 
-use clash::Args;
+use k8s_clash::Args;
 
 fn main() {
     let args = Args::parse();
@@ -14,5 +14,5 @@ fn main() {
     let writer = TemplateWriterBuilder::default()
         .path(args.output_path())
         .build().unwrap();
-    clash::generate(&writer, &config);
+    k8s_clash::generate(&writer, &config);
 }

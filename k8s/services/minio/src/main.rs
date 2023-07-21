@@ -1,7 +1,7 @@
 use clap::Parser;
 use edger_tui_app::prelude::{ConfigLoaderBuilder, TemplateWriterBuilder};
 
-use {{ package_name }}::Args;
+use k8s_minio::Args;
 
 fn main() {
     let args = Args::parse();
@@ -14,5 +14,5 @@ fn main() {
     let writer = TemplateWriterBuilder::default()
         .path(args.output_path())
         .build().unwrap();
-    {{ package_name }}::tpl::generate(&writer, &config);
+    k8s_minio::tpl::generate(&writer, &config);
 }

@@ -1,0 +1,34 @@
+get-pods:
+    kubectl get pods --namespace {{ namespace }}
+decrypt-secrets:
+    #!/usr/bin/env bash
+    echo "#!/usr/bin/env bash" > .secret.create-minio-secrets.bash
+    echo "kubectl create secret generic minio-secrets --namespace {{ namespace }} \\" >> .secret.create-minio-secrets.bash
+    ADMIN_PASSWORD=$(sops -d --extract '["admin"]' ../secret.minio.yaml)
+    echo "    --from-literal=admin_password='$ADMIN_PASSWORD' \\" >> .secret.create-minio-secrets.bash
+    chmod 700 .secret.*.bash
+apply-minio-secrets:
+    ./.secret.create-minio-secrets.bash
+apply-minio:
+    kubectl apply -f minio/deployment.yaml
+    kubectl apply -f minio/service.yaml
+    kubectl apply -f minio/ingress.api.yaml
+    kubectl apply -f minio/ingress.console.yaml
+apply-all:
+    just apply-minio-secrets
+    just apply-minio
+delete-minio-secrets:
+    kubectl delete --namespace {{ namespace }} secrets minio-secrets
+delete-minio:
+    kubectl delete -f minio/deployment.yaml
+    kubectl delete -f minio/service.yaml
+    kubectl delete -f minio/ingress.api.yaml
+    kubectl delete -f minio/ingress.console.yaml
+delete-all:
+    just delete-minio-secrets
+    just delete-minio
+update-minio-config:
+    just delete-minio-secrets
+    just apply-minio-secrets
+restart-minio:
+    kubectl --namespace {{ namespace }} rollout restart deploy/minio

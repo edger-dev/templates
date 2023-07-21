@@ -12,7 +12,7 @@ pub struct Cargo(Config);
 pub struct Askama(Config);
 
 #[derive(Template, Deref)]
-#[template(path = "gitignore.txt")]
+#[template(path = "gitignore")]
 pub struct GitIgnore(Config);
 
 

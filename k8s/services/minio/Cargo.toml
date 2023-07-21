@@ -1,6 +1,6 @@
 [package]
 publish = false
-name = "k8s_clash"
+name = "k8s_minio"
 version = "0.1.0"
 
 edition.workspace = true

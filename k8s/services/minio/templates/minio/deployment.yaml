@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: {{ namespace }}
+  name: minio
+  labels:
+    app: minio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+        - name: minio
+          image: quay.io/minio/minio:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9000
+              name: api
+            - containerPort: 9001
+              name: console
+          volumeMounts:
+            - mountPath: "/data"
+              name: minio-data
+          env:
+            - name: MINIO_SERVER_URL
+            {%- if with_https %}
+              value: "https://{{ api_host }}"
+            {%- else %}
+              value: "http://{{ api_host }}"
+            {%- endif %}
+            - name: MINIO_BROWSER_REDIRECT_URL
+            {%- if with_https %}
+              value: "https://{{ console_host }}"
+            {%- else %}
+              value: "http://{{ console_host }}"
+            {%- endif %}
+            - name: MINIO_ROOT_USER
+              value: admin
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secrets
+                  key: admin_password
+          args:
+            - "server"
+            - "/data"
+            - "--console-address"
+            - ":9001"
+  volumeClaimTemplates:
+    - metadata:
+        name: minio-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: {{ volume_size }}

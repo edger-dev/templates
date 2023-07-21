@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: {{ namespace }}
+  name: minio-console
+  annotations:
+    kubernetes.io/ingress.class: traefik
+  {%- if cert_manager_cluster_issuer != "" %}
+    cert-manager.io/cluster-issuer: {{ cert_manager_cluster_issuer }}
+  {%- endif %}
+  {%- if traefik_router_middlewares != "" %}
+    traefik.ingress.kubernetes.io/router.middlewares: {{ traefik_router_middlewares }}
+  {%- endif %}
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: {{ console_host }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: minio
+            port:
+              number: 9001
+        path: /
+        pathType: Prefix
+{%- if with_https %}
+  tls:
+    - secretName: minio-tls
+      hosts:
+        - {{ console_host }}
+{%- endif %}

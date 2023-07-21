@@ -9,6 +9,7 @@ resolver = "2"
 members = [
     "create",
     "k8s/services/clash",
+    "k8s/services/minio",
 ]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
