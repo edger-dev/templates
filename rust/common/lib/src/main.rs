@@ -10,7 +10,7 @@ fn main() {
     let config = ConfigLoaderBuilder::default()
         .toml_path(args.config_path())
         .build().unwrap()
-        .load();
+        .load_with_args(&args);
     let writer = TemplateWriterBuilder::default()
         .path(args.output_path())
         .build().unwrap();
