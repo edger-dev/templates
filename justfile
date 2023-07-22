@@ -11,7 +11,7 @@ _run_config bin config output:
         --bin {{ bin }} -- \
         --config {{ config }} --output {{ output }}
 rust_template package-name output: (_run_package "rust_template" package-name output)
-rust_lib package-name output: (_run_package "rust_template" package-name output)
+rust_lib package-name output: (_run_package "rust_lib" package-name output)
 k8s_clash config output: (_run_config "k8s_clash" config output)
 k8s_minio config output: (_run_config "k8s_minio" config output)
 k8s_plantuml config output: (_run_config "k8s_plantuml" config output)
