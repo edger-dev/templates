@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ namespace }}
+  name: languagetool
+  labels:
+    app: languagetool
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: languagetool
+  template:
+    metadata:
+      labels:
+        app: languagetool
+    spec:
+      containers:
+        - name: languagetool
+          image: docker.io/meyay/languagetool:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8010
+              name: web
+

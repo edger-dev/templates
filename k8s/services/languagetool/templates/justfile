@@ -1,0 +1,16 @@
+get-pods:
+    kubectl get pods --namespace {{ namespace }}
+apply-languagetool:
+    kubectl apply -f languagetool/deployment.yaml
+    kubectl apply -f languagetool/service.yaml
+    kubectl apply -f languagetool/ingress.yaml
+apply-all:
+    just apply-languagetool
+delete-languagetool:
+    kubectl delete -f languagetool/deployment.yaml
+    kubectl delete -f languagetool/service.yaml
+    kubectl delete -f languagetool/ingress.yaml
+delete-all:
+    just delete-languagetool
+restart-languagetool:
+    kubectl --namespace {{ namespace }} rollout restart deploy/languagetool
