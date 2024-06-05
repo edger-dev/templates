@@ -1,0 +1,16 @@
+get-pods:
+    kubectl get pods --namespace {{ namespace }}
+apply-libretranslate:
+    kubectl apply -f libretranslate/deployment.yaml
+    kubectl apply -f libretranslate/service.yaml
+    kubectl apply -f libretranslate/ingress.yaml
+apply-all:
+    just apply-libretranslate
+delete-libretranslate:
+    kubectl delete -f libretranslate/deployment.yaml
+    kubectl delete -f libretranslate/service.yaml
+    kubectl delete -f libretranslate/ingress.yaml
+delete-all:
+    just delete-libretranslate
+restart-libretranslate:
+    kubectl --namespace {{ namespace }} rollout restart deploy/libretranslate

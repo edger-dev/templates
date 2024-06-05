@@ -13,6 +13,7 @@ members = [
     "k8s/services/minio",
     "k8s/services/plantuml",
     "k8s/services/languagetool",
+    "k8s/services/libretranslate",
 ]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
