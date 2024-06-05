@@ -16,4 +16,5 @@ k8s_clash config output: (_run_config "k8s_clash" config output)
 k8s_minio config output: (_run_config "k8s_minio" config output)
 k8s_plantuml config output: (_run_config "k8s_plantuml" config output)
 k8s_languagetool config output: (_run_config "k8s_languagetool" config output)
+k8s_libretranslate config output: (_run_config "k8s_libretranslate" config output)
 
